@@ -9,7 +9,7 @@ RUN mvn clean install
 
 FROM openjdk:17-slim
 
-EXPOSE 8030
+EXPOSE 8080
 
 COPY --from=build /target/online-test-1.0.0.jar app.jar
 
