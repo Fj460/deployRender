@@ -1,16 +1,5 @@
-FROM ubuntu:latest AS build
-
-RUN apt-get update
-RUN apt-get install openjdk-17-jdk -y
-COPY . .
-
-RUN apt-get install maven -y
-RUN mvn clean install
-
-FROM openjdk:17-slim
-
-EXPOSE 8080
-
-COPY --from=build /target/online-test-1.0.0.jar app.jar
-
-ENTRYPOINT ["java", "-jar", "app.jar"]
+FROM eclipse-temurin:17-jdk-alpine
+WORKDIR /app
+COPY target/online-test-1.0.0.jar online-test-1.0.0.jar
+EXPOSE 8087
+CMD ["java", "-jar", "online-test-1.0.0.jar"]
